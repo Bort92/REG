@@ -16,6 +16,7 @@
       --muted:   #5a5a52;
       --caption: #888880;
       --gold:    #c8a84b;
+      --green:   #3a6b3a;
       --s-col:   #4a9b6f;
       --m-col:   #2e6e6e;
       --om-col:  #1f2e35;
@@ -31,64 +32,66 @@
       font-family: 'Source Sans 3', sans-serif;
       background: var(--bg);
       color: var(--navy);
-      padding: 16px;
+      padding: 14px 16px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .intro {
-      background: var(--surface);
-      border-left: 4px solid var(--gold);
-      border-radius: 0 4px 4px 0;
-      padding: 9px 14px;
-      font-size: 11.5px;
-      color: var(--muted);
-      line-height: 1.55;
+    /* ── TITLE ── */
+    .page-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--green);
       flex-shrink: 0;
     }
 
-    .section-label {
-      font-size: 9.5px;
+    .page-subtitle {
+      font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       color: var(--caption);
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
+      margin-bottom: 2px;
     }
 
-    .charts-grid {
+    /* ── TWO ROW LAYOUT ── */
+    .charts-row {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 14px;
-      flex: 1;
-      min-height: 0;
+      grid-template-columns: 200px 1fr;
+      gap: 12px;
+      height: 270px;
+      flex-shrink: 0;
     }
 
     .chart-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       min-height: 0;
     }
 
+    .chart-card.full {
+      height: 310px;
+      flex-shrink: 0;
+    }
+
     .chart-title {
-      font-family: 'Source Serif 4', serif;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 12.5px;
+      font-weight: 700;
       color: var(--navy);
-      line-height: 1.3;
       flex-shrink: 0;
     }
 
     .chart-subtitle {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--muted);
       flex-shrink: 0;
     }
@@ -102,21 +105,27 @@
     .legend {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       flex-shrink: 0;
+    }
+
+    .legend-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 11px;
+      gap: 5px;
+      font-size: 10.5px;
       color: var(--muted);
     }
 
     .legend-dot {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -126,22 +135,23 @@
       color: var(--caption);
       font-style: italic;
       border-top: 1px solid var(--border);
-      padding-top: 7px;
+      padding-top: 6px;
       flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
-  <div class="intro">
-    OMB age class data from the Rangitīkei Environment Group 2024–25 season report. Values are estimated midpoints from qualitative range descriptors (e.g. "100's" = 150, "&lt;10" = 5). Charts are indicative only.
+  <!-- TITLE -->
+  <div>
+    <div class="page-subtitle">Targeted Rate Project</div>
+    <div class="page-title">Rangitīkei Environment Group</div>
   </div>
 
-  <div class="section-label">OMB Age Class Distribution – 2024–25 Season</div>
+  <!-- TOP ROW: pie + bar side by side -->
+  <div class="charts-row">
 
-  <div class="charts-grid">
-
-    <!-- PIE CHART -->
+    <!-- PIE -->
     <div class="chart-card">
       <div class="chart-title">Total OMB by Age Class</div>
       <div class="chart-subtitle">All 12 sites combined</div>
@@ -156,7 +166,7 @@
       <div class="note">S ≈ 1,995 · M ≈ 887 · OM ≈ 150</div>
     </div>
 
-    <!-- BAR CHART -->
+    <!-- BAR -->
     <div class="chart-card">
       <div class="chart-title">OMB Age Class by Reserve</div>
       <div class="chart-subtitle">Estimated counts per site, 2024–25</div>
@@ -168,14 +178,42 @@
 
   </div>
 
+  <!-- BOTTOM ROW: stacked bar full width -->
+  <div class="chart-card full">
+    <div class="chart-title">OMB Age Class Composition by Reserve</div>
+    <div class="chart-subtitle">Stacked view — proportion of each age class per site</div>
+    <div class="chart-wrap">
+      <canvas id="stackedChart"></canvas>
+    </div>
+    <div class="legend">
+      <div class="legend-row">
+        <div class="legend-item"><div class="legend-dot" style="background:#4a9b6f"></div>Seedling (S)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#2e6e6e"></div>Mature (M)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1f2e35"></div>Old Mature (OM)</div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const sCol  = '#4a9b6f';
     const mCol  = '#2e6e6e';
     const omCol = '#1f2e35';
 
-    // PIE
-    const pieCtx = document.getElementById('pieChart').getContext('2d');
-    new Chart(pieCtx, {
+    const sites = [
+      'Memorial Park','Boshers Bush','Papakai Reserve','Mount Stewart',
+      'Spooners Hill','Lairds Bush','S. Mangahoe','S. Puriri/Outer',
+      'McPhersons','Pryces Rahui','Greystoke','Tutaenui'
+    ];
+
+    const seedling  = [150, 150, 150, 150,   0,   0, 150, 175, 1000,  20,  75,  0];
+    const mature    = [ 50, 150, 150, 150,  75,   5,   5, 100,  150,  25,  25,  2];
+    const oldMature = [  0,   5,   5,   5,  15,   0,   0,  20,  100,   0,   0,  0];
+
+    const tickFont = { family: "'Source Sans 3', sans-serif", size: 10 };
+    const tickColor = '#888880';
+
+    // ── PIE ──
+    new Chart(document.getElementById('pieChart'), {
       type: 'doughnut',
       data: {
         labels: ['Seedling (S)', 'Mature (M)', 'Old Mature (OM)'],
@@ -184,7 +222,7 @@
           backgroundColor: [sCol, mCol, omCol],
           borderColor: '#ffffff',
           borderWidth: 3,
-          hoverOffset: 6
+          hoverOffset: 5
         }]
       },
       options: {
@@ -194,35 +232,43 @@
           legend: { display: false },
           tooltip: {
             callbacks: {
-              label: ctx => ` ${ctx.label}: ~${ctx.parsed.toLocaleString()} (${Math.round(ctx.parsed / 3032 * 100)}%)`
+              label: ctx => ` ${ctx.label}: ~${ctx.parsed.toLocaleString()} (${Math.round(ctx.parsed/3032*100)}%)`
             }
           }
         }
       }
     });
 
-    // BAR
-    const sites = [
-      'Memorial Park',
-      'Boshers Bush',
-      'Papakai Reserve',
-      'Mount Stewart',
-      'Spooners Hill',
-      'Lairds Bush',
-      'Sutherlands Mangahoe',
-      'Sutherlands Puriri/Outer',
-      'McPhersons Bush',
-      'Pryces Rahui',
-      'Greystoke Reserve',
-      'Tutaenui Reservoirs'
-    ];
+    // ── GROUPED BAR ──
+    const barOpts = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ~${ctx.parsed.y}` } }
+      },
+      scales: {
+        x: { ticks: { font: { family: "'Source Sans 3', sans-serif", size: 9 }, color: tickColor, maxRotation: 40 }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { font: tickFont, color: tickColor }, grid: { color: '#eeeee9' },
+             title: { display: true, text: 'Est. count', font: { family: "'Source Sans 3', sans-serif", size: 9.5 }, color: tickColor } }
+      }
+    };
 
-    const seedling  = [150, 150, 150, 150,   0,   0, 150, 175, 1000,  20,  75,  0];
-    const mature    = [ 50, 150, 150, 150,  75,   5,   5, 100,  150,  25,  25,  2];
-    const oldMature = [  0,   5,   5,   5,  15,   0,   0,  20,  100,   0,   0,  0];
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: sites,
+        datasets: [
+          { label: 'Seedling (S)',    data: seedling,  backgroundColor: sCol  },
+          { label: 'Mature (M)',      data: mature,    backgroundColor: mCol  },
+          { label: 'Old Mature (OM)', data: oldMature, backgroundColor: omCol }
+        ]
+      },
+      options: barOpts
+    });
 
-    const barCtx = document.getElementById('barChart').getContext('2d');
-    new Chart(barCtx, {
+    // ── STACKED BAR ──
+    new Chart(document.getElementById('stackedChart'), {
       type: 'bar',
       data: {
         labels: sites,
@@ -236,49 +282,13 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: {
-            position: 'top',
-            labels: {
-              font: { family: "'Source Sans 3', sans-serif", size: 11 },
-              color: '#5a5a52',
-              boxWidth: 10,
-              boxHeight: 10,
-              borderRadius: 5,
-              useBorderRadius: true,
-              padding: 10
-            }
-          },
-          tooltip: {
-            callbacks: {
-              label: ctx => ` ${ctx.dataset.label}: ~${ctx.parsed.y} plants`
-            }
-          }
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ~${ctx.parsed.y}` } }
         },
         scales: {
-          x: {
-            stacked: false,
-            ticks: {
-              font: { family: "'Source Sans 3', sans-serif", size: 9.5 },
-              color: '#5a5a52',
-              maxRotation: 45,
-              minRotation: 35
-            },
-            grid: { display: false }
-          },
-          y: {
-            beginAtZero: true,
-            ticks: {
-              font: { family: "'Source Sans 3', sans-serif", size: 10 },
-              color: '#888880'
-            },
-            grid: { color: '#ebebе6' },
-            title: {
-              display: true,
-              text: 'Estimated plant count',
-              font: { family: "'Source Sans 3', sans-serif", size: 10 },
-              color: '#888880'
-            }
-          }
+          x: { stacked: true, ticks: { font: { family: "'Source Sans 3', sans-serif", size: 10 }, color: tickColor, maxRotation: 35 }, grid: { display: false } },
+          y: { stacked: true, beginAtZero: true, ticks: { font: tickFont, color: tickColor }, grid: { color: '#eeeee9' },
+               title: { display: true, text: 'Est. total count', font: { family: "'Source Sans 3', sans-serif", size: 9.5 }, color: tickColor } }
         }
       }
     });
