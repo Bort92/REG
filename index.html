@@ -29,7 +29,7 @@
       color: var(--navy);
       padding: 12px 14px;
       display: grid;
-      grid-template-rows: 36px 220px 1fr;
+      grid-template-rows: 36px 255px 1fr;
       gap: 8px;
     }
 
@@ -45,7 +45,7 @@
 
     .top-row {
       display: grid;
-      grid-template-columns: 200px 1fr;
+      grid-template-columns: 1fr 240px;
       gap: 8px;
     }
 
@@ -107,18 +107,20 @@
   <div class="top-row">
 
     <!-- PIE -->
-    <div class="card">
-      <div class="card-title">Total OMB by Age Class</div>
-      <div class="card-sub">All 12 sites combined</div>
-      <div class="chart-wrap">
+    <div class="card" style="flex-direction: row; gap: 12px; align-items: center;">
+      <div class="chart-wrap" style="width: 190px; height: 190px; flex-shrink: 0;">
         <canvas id="pieChart"></canvas>
       </div>
-      <div class="dot-legend">
-        <div class="dot-item"><div class="dot" style="background:#4a9b6f"></div>Seedling (S) &lt;1yr</div>
-        <div class="dot-item"><div class="dot" style="background:#2e6e6e"></div>Mature (M) 3–10yr</div>
-        <div class="dot-item"><div class="dot" style="background:#1f2e35"></div>Old Mature (OM) 10+yr</div>
+      <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; width:140px;">
+        <div class="card-title">Total OMB<br>by Age Class</div>
+        <div class="card-sub">All 12 sites combined</div>
+        <div class="dot-legend">
+          <div class="dot-item"><div class="dot" style="background:#4a9b6f"></div>Seedling (S) &lt;1yr</div>
+          <div class="dot-item"><div class="dot" style="background:#2e6e6e"></div>Mature (M) 3–10yr</div>
+          <div class="dot-item"><div class="dot" style="background:#1f2e35"></div>Old Mature (OM) 10+yr</div>
+        </div>
+        <div class="note" style="border-top:none; padding-top:0;">S ≈ 1,995<br>M ≈ 887<br>OM ≈ 150</div>
       </div>
-      <div class="note">S ≈ 1,995 · M ≈ 887 · OM ≈ 150</div>
     </div>
 
     <!-- MAP LEGEND -->
@@ -139,7 +141,7 @@
         Track
       </div>
 
-      <div class="ml-divider"></div>
+      <div class="ml-divider" style="margin: 3px 0;"></div>
 
       <div class="ml-section">Targeted Rates Projects</div>
       <div class="ml-group">Rangitīkei Environment Group (REG)</div>
@@ -163,7 +165,6 @@
       <div class="dot-item"><div class="dot" style="background:#2e6e6e"></div>Mature (M)</div>
       <div class="dot-item"><div class="dot" style="background:#1f2e35"></div>Old Mature (OM)</div>
     </div>
-    <div class="note">Site 10 includes two sub-sections. Values are estimated midpoints from field report ranges.</div>
   </div>
 
   <script>
