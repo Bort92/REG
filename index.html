@@ -16,59 +16,56 @@
       --muted:   #5a5a52;
       --caption: #888880;
       --green:   #3a6b3a;
-      --s-col:   #4a9b6f;
-      --m-col:   #2e6e6e;
-      --om-col:  #1f2e35;
     }
 
-    html, body { width: 782px; height: 750px; overflow: hidden; }
+    html, body { width: 879px; height: 866px; overflow: hidden; }
 
     body {
       font-family: 'Source Sans 3', sans-serif;
       background: var(--bg);
       color: var(--navy);
-      padding: 12px 14px;
+      padding: 14px 16px;
       display: grid;
-      grid-template-rows: 36px 255px 1fr;
-      gap: 8px;
+      grid-template-rows: 42px 290px 1fr;
+      gap: 10px;
     }
 
     .page-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--navy);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       border-bottom: 2px solid var(--green);
       align-self: end;
     }
 
     .top-row {
       display: grid;
-      grid-template-columns: 1fr 240px;
-      gap: 8px;
+      grid-template-columns: 1fr 280px;
+      gap: 10px;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 10px 12px;
+      padding: 14px 16px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       overflow: hidden;
     }
 
     .card-title {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--navy);
       flex-shrink: 0;
     }
 
     .card-sub {
-      font-size: 10px;
+      font-size: 11.5px;
       color: var(--muted);
       flex-shrink: 0;
     }
@@ -79,25 +76,23 @@
       min-height: 0;
     }
 
+    .dot-legend { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
+    .dot-row    { display: flex; gap: 16px; flex-shrink: 0; }
+    .dot-item   { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+    .dot        { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
     .note {
-      font-size: 9.5px;
+      font-size: 11px;
       color: var(--caption);
       font-style: italic;
-      border-top: 1px solid var(--border);
-      padding-top: 5px;
       flex-shrink: 0;
     }
 
-    .dot-legend { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
-    .dot-row    { display: flex; gap: 14px; flex-shrink: 0; }
-    .dot-item   { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); }
-    .dot        { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-
     /* MAP LEGEND */
-    .ml-section  { font-size: 10.5px; font-weight: 700; color: var(--navy); margin-top: 4px; }
-    .ml-group    { font-size: 10px; font-weight: 600; color: var(--muted); margin-top: 5px; margin-bottom: 2px; }
-    .ml-item     { display: flex; align-items: center; gap: 8px; font-size: 10.5px; color: var(--muted); padding-left: 2px; margin-bottom: 4px; }
-    .ml-divider  { height: 1px; background: var(--border); margin: 8px 0; }
+    .ml-section  { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 3px; }
+    .ml-group    { font-size: 11.5px; font-weight: 600; color: var(--muted); margin-top: 4px; margin-bottom: 3px; }
+    .ml-item     { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); padding-left: 2px; margin-bottom: 4px; }
+    .ml-divider  { height: 1px; background: var(--border); margin: 3px 0; }
   </style>
 </head>
 <body>
@@ -107,42 +102,37 @@
   <div class="top-row">
 
     <!-- PIE -->
-    <div class="card" style="flex-direction: row; gap: 12px; align-items: center;">
-      <div class="chart-wrap" style="width: 190px; height: 190px; flex-shrink: 0;">
+    <div class="card" style="flex-direction: row; gap: 16px; align-items: center; justify-content: center;">
+      <div style="width: 220px; height: 220px; flex-shrink: 0;">
         <canvas id="pieChart"></canvas>
       </div>
-      <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; width:140px;">
-        <div class="card-title">Total OMB<br>by Age Class</div>
-        <div class="card-sub">All 12 sites combined</div>
+      <div style="display:flex; flex-direction:column; gap:10px; flex-shrink:0; min-width:200px;">
+        <div class="card-title" style="font-size:16px;">Total OMB by Age Class</div>
+        <div class="card-sub" style="font-size:13px;">All 12 sites combined</div>
         <div class="dot-legend">
           <div class="dot-item"><div class="dot" style="background:#4a9b6f"></div>Seedling (S) &lt;1yr</div>
           <div class="dot-item"><div class="dot" style="background:#2e6e6e"></div>Mature (M) 3–10yr</div>
           <div class="dot-item"><div class="dot" style="background:#1f2e35"></div>Old Mature (OM) 10+yr</div>
         </div>
-        <div class="note" style="border-top:none; padding-top:0;">S ≈ 1,995<br>M ≈ 887<br>OM ≈ 150</div>
+        <div class="note">S ≈ 1,995 · M ≈ 887 · OM ≈ 150</div>
       </div>
     </div>
 
     <!-- MAP LEGEND -->
     <div class="card">
       <div class="card-title">Map Legend</div>
-
       <div class="ml-section">Biodiversity Targeted Rates Contractor Data</div>
-
       <div class="ml-group">REG Points</div>
       <div class="ml-item">
-        <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="#555" stroke-width="1.5"/></svg>
+        <svg width="15" height="15" viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="#555" stroke-width="1.5"/></svg>
         Old man's beard
       </div>
-
       <div class="ml-group">REG Tracks</div>
       <div class="ml-item">
-        <svg width="24" height="8" viewBox="0 0 24 8"><line x1="0" y1="4" x2="24" y2="4" stroke="#1a1a1a" stroke-width="2.5"/></svg>
+        <svg width="26" height="8" viewBox="0 0 26 8"><line x1="0" y1="4" x2="26" y2="4" stroke="#1a1a1a" stroke-width="2.5"/></svg>
         Track
       </div>
-
-      <div class="ml-divider" style="margin: 3px 0;"></div>
-
+      <div class="ml-divider"></div>
       <div class="ml-section">Targeted Rates Projects</div>
       <div class="ml-group">Rangitīkei Environment Group (REG)</div>
       <div class="ml-item">
@@ -182,14 +172,14 @@
     const mature    = [ 50, 150, 150, 150,  75,   5,   5, 100,  150,  25,  25,  2];
     const oldMature = [  0,   5,   5,   5,  15,   0,   0,  20,  100,   0,   0,  0];
 
-    const tickFont  = { family: "'Source Sans 3', sans-serif", size: 9.5 };
+    const tickFont  = { family: "'Source Sans 3', sans-serif", size: 11.5 };
     const tickColor = '#888880';
 
     new Chart(document.getElementById('pieChart'), {
       type: 'doughnut',
       data: {
         labels: ['Seedling (S)', 'Mature (M)', 'Old Mature (OM)'],
-        datasets: [{ data: [1995, 887, 150], backgroundColor: [sCol, mCol, omCol], borderColor: '#fff', borderWidth: 2, hoverOffset: 4 }]
+        datasets: [{ data: [1995, 887, 150], backgroundColor: [sCol, mCol, omCol], borderColor: '#fff', borderWidth: 3, hoverOffset: 5 }]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
@@ -217,9 +207,9 @@
           tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ~${ctx.parsed.y}` } }
         },
         scales: {
-          x: { stacked: true, ticks: { font: { family: "'Source Sans 3', sans-serif", size: 9.5 }, color: tickColor, maxRotation: 35 }, grid: { display: false } },
+          x: { stacked: true, ticks: { font: tickFont, color: tickColor, maxRotation: 35 }, grid: { display: false } },
           y: { stacked: true, beginAtZero: true, ticks: { font: tickFont, color: tickColor }, grid: { color: '#eeeee9' },
-               title: { display: true, text: 'Est. count', font: { family: "'Source Sans 3', sans-serif", size: 9 }, color: tickColor } }
+               title: { display: true, text: 'Est. count', font: { family: "'Source Sans 3', sans-serif", size: 11 }, color: tickColor } }
         }
       }
     });
